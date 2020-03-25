@@ -1,0 +1,77 @@
+
+Title:{{title}}
+
+<router-outlet></router-outlet>
+<h1>TableHttp</h1>
+<div *ngIf="noError else nousersref">
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>FirstName</th>
+      <th>Last Name</th>
+      <th>Email</th>
+    </tr>
+    <tr *ngFor="let i of employees">
+      <td>{{i.id}}</td>
+      <td>{{i.firstName}}</td>
+      <td>{{i.lastName}}</td>
+      <td>{{i.emailId}}</td>
+    </tr>
+  </table>
+</div>
+<ng-template #nousersref>
+ <h2>Data not found</h2>
+ <h3>{{errMsg}}</h3>
+</ng-template>
+
+<h1>Table1</h1>
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>City</th>
+    <th>Salary</th>
+    <th>Dob</th>
+  </tr>
+
+  <tr *ngFor="let i of users">
+    <td>{{i.id}}</td>
+    <td>{{i.name}}</td>
+    <td>{{i.city}}</td>
+    <td>{{i.salary}}</td>
+    <td>{{i.dob | date}}</td>
+  </tr>
+</table>
+<h1>Table2</h1>
+<table>
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>City</th>
+      <th>Salary</th>
+      <th>Dob</th>
+    </tr>
+    <tr *ngFor="let i of users">
+      <td>{{i.id}}</td>
+      <td>{{i.name}}</td>
+      <td>{{i.city}}</td>
+      <td>{{i.salary}}</td>
+      <td>{{i.dob | date}}</td>
+    </tr>
+  </table>
+</table>
+
+<p>Heroes:</p>
+  <ul>
+    <li *ngFor="let hero of heroes">
+      {{ hero }}
+    </li>
+  </ul>
+
+  <p>Heroes2:</p>
+  <ul>
+    <li *ngFor="let hero of heroes2">
+      {{ hero.name }}
+    </li>
+  </ul>
