@@ -2,8 +2,8 @@
 Title:{{title}}
 
 <router-outlet></router-outlet>
-<h1>TableHttp</h1>
-<div *ngIf="noError else nousersref">
+<h1>EmployeesTableHttp</h1>
+<div *ngIf="noError else noempref">
   <table>
     <tr>
       <th>Id</th>
@@ -19,12 +19,32 @@ Title:{{title}}
     </tr>
   </table>
 </div>
+<ng-template #noempref>
+ <h2>Data not found</h2>
+ <h3>{{errMsg}}</h3>
+</ng-template>
+<hr>
+<h1>usersTableHttp</h1>
+<div *ngIf="noError else nousersref">
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+    <tr *ngFor="let i of users">
+      <td>{{i.id}}</td>
+      <td>{{i.name}}</td>
+      <td>{{i.email}}</td>
+    </tr>
+  </table>
+</div>
 <ng-template #nousersref>
  <h2>Data not found</h2>
  <h3>{{errMsg}}</h3>
 </ng-template>
-
-<h1>Table1</h1>
+<hr>
+<h1>Table1 usersArrayFromService</h1>
 <table>
   <tr>
     <th>Id</th>
@@ -34,7 +54,7 @@ Title:{{title}}
     <th>Dob</th>
   </tr>
 
-  <tr *ngFor="let i of users">
+  <tr *ngFor="let i of usersArrayFromService">
     <td>{{i.id}}</td>
     <td>{{i.name}}</td>
     <td>{{i.city}}</td>
@@ -42,7 +62,7 @@ Title:{{title}}
     <td>{{i.dob | date}}</td>
   </tr>
 </table>
-<h1>Table2</h1>
+<h1>Table2 usersArrayFromComponent</h1>
 <table>
   <table>
     <tr>
@@ -52,7 +72,7 @@ Title:{{title}}
       <th>Salary</th>
       <th>Dob</th>
     </tr>
-    <tr *ngFor="let i of users">
+    <tr *ngFor="let i of usersArrayFromComponent">
       <td>{{i.id}}</td>
       <td>{{i.name}}</td>
       <td>{{i.city}}</td>

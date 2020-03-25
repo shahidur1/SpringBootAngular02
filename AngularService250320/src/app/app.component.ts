@@ -8,25 +8,34 @@ import { UserserviceService } from './myservices/userservice.service';
 })
 export class AppComponent implements OnInit {
   title = 'AngularService250320';
-  employees:any;
+  employees: any;
+  users: any;
   constructor(private userservice: UserserviceService) { }
-  errMsg:string;
-  noError:boolean;
+  errMsg: string;
+  noError: boolean;
   ngOnInit() {
-    this.users = this.userservice.getAllUsers();
-    this.userservice.getAllUsers2()
-    .subscribe(
-      (data)=>{this.noError=true;this.employees=data},
-      //(error)=>{this.noError=false; this.errMsg=error.message}
-      (error)=>{this.noError=false; this.errMsg=error}
+    //this.users = this.userservice.getAllUsers();
+    this.userservice.getAllEmployees()
+      .subscribe(
+        //(data) => { this.noError = true; this.employees = data },
+        (data) => { this.noError = true; this.employees = data },
+        //(error)=>{this.noError=false; this.errMsg=error.message}
+        (error) => { this.noError = false; this.errMsg = error }
+      );
+    this.userservice.getAllUsers()
+      .subscribe(
+        //(data) => { this.noError = true; this.employees = data },
+        (data) => { this.noError = true; this.users = data },
+        //(error)=>{this.noError=false; this.errMsg=error.message}
+        (error) => { this.noError = false; this.errMsg = error }
       );
   }
-  users: any[] = this.userservice.getAllUsers();//Or directly assign
+  usersArrayFromService: any[] = this.userservice.getAllUsersArray();//Or directly assign
   //bellowline not recomended (note: classvar assign onlyatdeclaretime
   //further assign mustbe done inside method; constructor for
   //creating instance like new operator, not for value assignment 
   //anyclassvar: any[] = new UserserviceService().getAllUsers(); //no recommend
-  users2: any[] = [
+  usersArrayFromComponent: any[] = [
     { id: 101, name: "john", city: "Dhaka", salary: 2000, dob: new Date("12/25/1980") },
     { id: 102, name: "john", city: "Dhaka", salary: 2000, dob: new Date("12/25/1980") },
     { id: 103, name: "john", city: "Dhaka", salary: 2000, dob: new Date("12/25/1980") },
@@ -47,4 +56,8 @@ export class Hero {
   constructor(public id: number, public name: string) {
 
   }
+}
+export class Users {
+  constructor(public id: number, public name: string, public email: string) { }
+
 }

@@ -1,16 +1,24 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators'
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserserviceService {
-
+  employeesUrl: string = "http://localhost:8080/sba/api/employees";
+  usersUrl: string="https://shahidur1.github.io/jsonstore/users.json";
+  //usersUrl: string = "http://localhost:8080/api/users";
   constructor(private http: HttpClient) { }
-  getAllUsers2(): Observable<any[]> {
-    return this.http.get<any[]>("http://localhost:8080/sba/api/employees")
+  getAllEmployees(): Observable<any[]> {
+    return this.http.get<any[]>(this.employeesUrl)
+      .pipe(retry(1), catchError(this.handleErrorType));
+  }
+  getAllUsers(): Observable<any[]> {
+    return this.http.get<any[]>(this.usersUrl)
       .pipe(retry(1), catchError(this.handleErrorType));
   }
   handleError(err) {
@@ -34,7 +42,7 @@ export class UserserviceService {
   }
 
 
-  getAllUsers(): any[] {
+  getAllUsersArray(): any[] {
     return [
       { id: 101, name: "john12", city: "Dhaka", salary: 2000, dob: new Date("12/25/1980") },
       { id: 102, name: "john", city: "Dhaka", salary: 2000, dob: new Date("12/25/1980") },
